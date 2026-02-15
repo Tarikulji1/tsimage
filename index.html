@@ -3,43 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-    rel="stylesheet"
-/>
+    <title>PixelForge - Advanced Image Editor</title>
+    <meta name="description" content="Free online image editor with professional filters and presets. Adjust brightness, contrast, saturation, and more with real-time preview.">
+    <meta name="keywords" content="image editor, photo filters, image presets, online photo editor, canvas editor">
+    <meta name="author" content="PixelForge">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="PixelForge - Advanced Image Editor">
+    <meta property="og:description" content="Free online image editor with professional filters and presets">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="theme.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header with Title and Description -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="ri-palette-line"></i>
+                <h1>PixelForge <span class="version">v1.0</span></h1>
+            </div>
+            <p class="tagline">Transform your images with professional-grade filters</p>
+        </div>
+    </header>
+
     <main>
         <section>
             <div class="left">
                 <div class="top">
-                    <label for="image-input" class="btn">
+                    <label for="image-input" class="btn btn-primary">
+                        <i class="ri-upload-2-line"></i>
                         Choose image
                         <input type="file" id="image-input" accept="image/*" hidden>
                     </label>
-                    <button class="btn" id="reset-btn">Reset</button>
-                    <button class="btn" id="download-btn">Download</button>
+                    <button class="btn" id="reset-btn">
+                        <i class="ri-restart-line"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-success" id="download-btn">
+                        <i class="ri-download-2-line"></i>
+                        Download
+                    </button>
                 </div>
                 <div class="bottom">
                     <div class="placeholder">
                         <i class="ri-image-line"></i>
                         <p>No image selected</p>
+                        <span class="placeholder-hint">Click "Choose image" to get started</span>
                     </div>
                     <canvas id="image-canvas"></canvas>
                 </div>
-            </div>
-            <div class="right">
-                <h2>Filters</h2>
-                <div class="filters">
+                
+                <!-- Image Info Bar -->
+                <div class="image-info" id="image-info" style="display: none;">
+                    <div class="info-item">
+                        <i class="ri-image-line"></i>
+                        <span id="image-name">image.jpg</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="ri-size-line"></i>
+                        <span id="image-dimensions">1920 x 1080</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="ri-file-size-line"></i>
+                        <span id="image-size">2.5 MB</span>
+                    </div>
                 </div>
-                <h2>Presets</h2>
-                <div class="presets"></div>
+            </div>
+            
+            <div class="right">
+                <div class="right-header">
+                    <h2><i class="ri-settings-3-line"></i> Filters</h2>
+                    <button class="btn-icon" id="collapse-filters" title="Collapse">
+                        <i class="ri-subtract-line"></i>
+                    </button>
+                </div>
+                <div class="filters" id="filters-container"></div>
+                
+                <div class="right-header">
+                    <h2><i class="ri-gallery-line"></i> Presets</h2>
+                    <span class="presets-count">10 presets</span>
+                </div>
+                <div class="presets" id="presets-container"></div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="btn btn-outline" id="rotate-left-btn" title="Rotate Left">
+                        <i class="ri-rotate-left-line"></i>
+                    </button>
+                    <button class="btn btn-outline" id="rotate-right-btn" title="Rotate Right">
+                        <i class="ri-rotate-right-line"></i>
+                    </button>
+                    <button class="btn btn-outline" id="flip-horizontal-btn" title="Flip Horizontal">
+                        <i class="ri-flip-horizontal-line"></i>
+                    </button>
+                    <button class="btn btn-outline" id="flip-vertical-btn" title="Flip Vertical">
+                        <i class="ri-flip-vertical-line"></i>
+                    </button>
+                    <button class="btn btn-outline" id="reset-all-btn" title="Reset All">
+                        <i class="ri-delete-back-line"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features">
+            <h2 class="section-title">Why Choose PixelForge?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="ri-flashlight-line feature-icon"></i>
+                    <h3>10+ Professional Filters</h3>
+                    <p>Fine-tune brightness, contrast, saturation, and more with precise controls</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ri-gallery-line feature-icon"></i>
+                    <h3>10 Beautiful Presets</h3>
+                    <p>One-click transformations with vintage, drama, noir and other stunning effects</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ri-download-2-line feature-icon"></i>
+                    <h3>Free Downloads</h3>
+                    <p>Export your edited images in high-quality PNG format instantly</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ri-shield-check-line feature-icon"></i>
+                    <h3>100% Private</h3>
+                    <p>Your images never leave your browser - all processing happens locally</p>
+                </div>
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="ri-palette-line"></i>
+                    <span>PixelForge</span>
+                </div>
+                <p class="footer-description">A powerful, free image editor built with HTML5 Canvas. Perfect for quick edits and creative transformations.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="ri-home-line"></i> Home</a></li>
+                    <li><a href="#"><i class="ri-information-line"></i> About</a></li>
+                    <li><a href="#"><i class="ri-mail-line"></i> Contact</a></li>
+                    <li><a href="#"><i class="ri-question-line"></i> FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Features</h4>
+                <ul class="footer-links">
+                    <li><i class="ri-check-line"></i> 10 Filters</li>
+                    <li><i class="ri-check-line"></i> 10 Presets</li>
+                    <li><i class="ri-check-line"></i> Real-time Preview</li>
+                    <li><i class="ri-check-line"></i> PNG Export</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="GitHub"><i class="ri-github-fill"></i></a>
+                    <a href="#" class="social-link" title="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                    <a href="#" class="social-link" title="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+                    <a href="#" class="social-link" title="Email"><i class="ri-mail-fill"></i></a>
+                </div>
+                <p class="newsletter-hint">Stay updated with new features</p>
+                <form class="newsletter-form" onsubmit="return false;">
+                    <input type="email" placeholder="Your email" class="newsletter-input">
+                    <button type="submit" class="btn btn-small">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2026 PixelForge. All rights reserved.
+            </div>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+            <div class="made-with">
+                Made with <i class="ri-heart-3-fill heart-icon"></i> using HTML5 Canvas
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scroll-top" title="Scroll to top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
     <script src="./script.js"></script>
 </body>
 </html>
